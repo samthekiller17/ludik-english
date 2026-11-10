@@ -1,0 +1,182 @@
+{
+  "levels": [
+    {
+      "id": "A1",
+      "title": "Nice to meet you!",
+      "titleEs": "¡Mucho gusto!",
+      "topics": ["saludos", "números", "fechas", "información personal"],
+      "context": "Tom se inscribe en una clase de inglés. Escucha cómo da su información personal.",
+      "xp": 50,
+      "badge": "Oído A1",
+      "script": [
+        { "speaker": "Anna", "voice": "us", "text": "Good morning! Welcome to the Ludik English class. What's your name?" },
+        { "speaker": "Tom", "voice": "uk", "text": "Hi! My name is Tom Baker." },
+        { "speaker": "Anna", "voice": "us", "text": "Nice to meet you, Tom. How old are you?" },
+        { "speaker": "Tom", "voice": "uk", "text": "I am twenty-four years old." },
+        { "speaker": "Anna", "voice": "us", "text": "And what is your phone number?" },
+        { "speaker": "Tom", "voice": "uk", "text": "It's three, one, five, eight, two, nine, four." },
+        { "speaker": "Anna", "voice": "us", "text": "Great. When is your birthday?" },
+        { "speaker": "Tom", "voice": "uk", "text": "My birthday is on the twelfth of May." },
+        { "speaker": "Anna", "voice": "us", "text": "Where are you from?" },
+        { "speaker": "Tom", "voice": "uk", "text": "I'm from Medellín, in Colombia. But I live in Bogotá now." },
+        { "speaker": "Anna", "voice": "us", "text": "Perfect. The class starts on Monday at nine o'clock. See you then!" },
+        { "speaker": "Tom", "voice": "uk", "text": "Thank you! Goodbye." }
+      ],
+      "questions": [
+        {
+          "kind": "single",
+          "topic": "números (edad)",
+          "prompt": "How old is Tom?",
+          "promptEs": "¿Cuántos años tiene Tom?",
+          "options": ["14 years old", "24 years old", "42 years old"],
+          "answer": ["24 years old"],
+          "explanation": "Tom dice \"twenty-four\" (24). Ojo: \"forty-two\" sería 42."
+        },
+        {
+          "kind": "multi",
+          "topic": "vocabulario escuchado",
+          "prompt": "Which words did you hear? Choose all.",
+          "promptEs": "¿Qué palabras escuchaste? Marca todas.",
+          "options": ["Monday", "Friday", "birthday", "June", "May", "phone"],
+          "answer": ["Monday", "birthday", "May", "phone"],
+          "explanation": "Se mencionan: Monday (lunes), birthday (cumpleaños), May (mayo) y phone (teléfono)."
+        },
+        {
+          "kind": "single",
+          "topic": "información personal",
+          "prompt": "True or false? Tom lives in Medellín now.",
+          "promptEs": "¿Verdadero o falso? Tom vive ahora en Medellín.",
+          "options": ["True", "False"],
+          "answer": ["False"],
+          "explanation": "Es de Medellín, pero \"I live in Bogotá now\": ahora vive en Bogotá."
+        },
+        {
+          "kind": "single",
+          "topic": "la hora",
+          "prompt": "Complete: The class starts on Monday at ___ o'clock.",
+          "promptEs": "Completa: La clase empieza el lunes a las ___.",
+          "options": ["eight", "nine", "ten"],
+          "answer": ["nine"],
+          "explanation": "Anna dice \"at nine o'clock\": a las nueve."
+        }
+      ]
+    },
+    {
+      "id": "B1",
+      "title": "Calling IT support",
+      "titleEs": "Llamada a soporte técnico",
+      "topics": ["conversaciones laborales", "llamadas", "correos", "solicitudes de soporte"],
+      "context": "David llama a soporte técnico porque tiene problemas antes de una reunión.",
+      "xp": 80,
+      "badge": "Oído B1",
+      "script": [
+        { "speaker": "Laura", "voice": "us", "text": "Good afternoon, IT support, this is Laura speaking. How can I help you?" },
+        { "speaker": "David", "voice": "uk", "text": "Hi Laura, it's David Carter from the marketing team. I can't access my email since this morning." },
+        { "speaker": "Laura", "voice": "us", "text": "I'm sorry to hear that. Have you changed your password recently?" },
+        { "speaker": "David", "voice": "uk", "text": "Yes, I changed it yesterday, but now the system says it's incorrect." },
+        { "speaker": "Laura", "voice": "us", "text": "OK. I'll reset it for you. You'll receive a temporary password by text message in five minutes." },
+        { "speaker": "David", "voice": "uk", "text": "Great. Also, I have a meeting with a client at three, and I need the projector in room B to work." },
+        { "speaker": "Laura", "voice": "us", "text": "No problem. I'll send a technician to room B before two thirty. Could you confirm your extension number?" },
+        { "speaker": "David", "voice": "uk", "text": "Sure, it's four two seven." },
+        { "speaker": "Laura", "voice": "us", "text": "Perfect. I've opened a ticket for you. Your ticket number is eight eight one. Is there anything else?" },
+        { "speaker": "David", "voice": "uk", "text": "No, that's all. Thanks a lot for your help." }
+      ],
+      "questions": [
+        {
+          "kind": "single",
+          "topic": "idea principal",
+          "prompt": "Why is David calling?",
+          "promptEs": "¿Por qué llama David?",
+          "options": ["He can't access his email.", "His computer is broken.", "He wants a new phone."],
+          "answer": ["He can't access his email."],
+          "explanation": "\"I can't access my email since this morning\": no puede entrar a su correo."
+        },
+        {
+          "kind": "multi",
+          "topic": "vocabulario laboral",
+          "prompt": "Which words did you hear? Choose all.",
+          "promptEs": "¿Qué palabras escuchaste? Marca todas.",
+          "options": ["password", "printer", "ticket", "invoice", "technician", "projector"],
+          "answer": ["password", "ticket", "technician", "projector"],
+          "explanation": "Se mencionan password (contraseña), ticket, technician (técnico) y projector (proyector)."
+        },
+        {
+          "kind": "single",
+          "topic": "detalles específicos",
+          "prompt": "True or false? The temporary password will arrive by email.",
+          "promptEs": "¿Verdadero o falso? La contraseña temporal llegará por correo.",
+          "options": ["True", "False"],
+          "answer": ["False"],
+          "explanation": "Llegará \"by text message\": por mensaje de texto, no por correo."
+        },
+        {
+          "kind": "single",
+          "topic": "horas y plazos",
+          "prompt": "Complete: A technician will go to room B before ___.",
+          "promptEs": "Completa: Un técnico irá a la sala B antes de las ___.",
+          "options": ["two o'clock", "two thirty", "three thirty"],
+          "answer": ["two thirty"],
+          "explanation": "\"Before two thirty\": antes de las 2:30. La reunión es a las tres."
+        }
+      ]
+    },
+    {
+      "id": "C1",
+      "title": "The strategy meeting",
+      "titleEs": "La reunión estratégica",
+      "topics": ["presentaciones ejecutivas", "discusiones estratégicas", "liderazgo", "toma de decisiones"],
+      "context": "María, la directora, resume dos opciones antes de una votación. James plantea una preocupación.",
+      "xp": 120,
+      "badge": "Oído C1",
+      "script": [
+        { "speaker": "María", "voice": "us", "text": "Good morning, everyone. Before we vote, let me summarise where we stand. Over the last two quarters, our revenue in the Andean region grew by eighteen percent, while customer retention dropped slightly." },
+        { "speaker": "María", "voice": "us", "text": "The board has proposed two options. The first is to open a new office in Lima, which would require a significant upfront investment. The second is to strengthen our digital platform and partner with local universities." },
+        { "speaker": "María", "voice": "us", "text": "Personally, I'm convinced that the second option offers a better return with considerably lower risk. That said, I'd like to hear your concerns before we make a final decision." },
+        { "speaker": "James", "voice": "uk", "text": "Thanks, María. My main concern is that relying on partners might slow down our decision-making. Could we run a six-month pilot first?" },
+        { "speaker": "María", "voice": "us", "text": "That's a fair point. A pilot would let us measure the impact without committing the entire budget. Let's put that to the vote." }
+      ],
+      "questions": [
+        {
+          "kind": "single",
+          "topic": "postura del hablante",
+          "prompt": "Which option does María prefer?",
+          "promptEs": "¿Qué opción prefiere María?",
+          "options": [
+            "Strengthening the digital platform with universities.",
+            "Opening a new office in Lima.",
+            "Reducing the marketing budget."
+          ],
+          "answer": ["Strengthening the digital platform with universities."],
+          "explanation": "\"I'm convinced that the second option offers a better return\": prefiere la plataforma digital con universidades."
+        },
+        {
+          "kind": "multi",
+          "topic": "vocabulario de negocios",
+          "prompt": "Which words did you hear? Choose all.",
+          "promptEs": "¿Qué palabras escuchaste? Marca todas.",
+          "options": ["revenue", "merger", "retention", "shareholders", "pilot", "budget"],
+          "answer": ["revenue", "retention", "pilot", "budget"],
+          "explanation": "Se mencionan revenue (ingresos), retention (retención), pilot (piloto) y budget (presupuesto)."
+        },
+        {
+          "kind": "single",
+          "topic": "inferencia de datos",
+          "prompt": "True or false? Customer retention improved during the last two quarters.",
+          "promptEs": "¿Verdadero o falso? La retención de clientes mejoró en los dos últimos trimestres.",
+          "options": ["True", "False"],
+          "answer": ["False"],
+          "explanation": "\"Customer retention dropped slightly\": bajó un poco. Lo que creció fueron los ingresos."
+        },
+        {
+          "kind": "single",
+          "topic": "propuestas y matices",
+          "prompt": "Complete: James suggests running a ___ pilot first.",
+          "promptEs": "Completa: James sugiere hacer primero un piloto de ___.",
+          "options": ["three-month", "six-month", "twelve-month"],
+          "answer": ["six-month"],
+          "explanation": "\"Could we run a six-month pilot first?\": un piloto de seis meses."
+        }
+      ]
+    }
+  ]
+}

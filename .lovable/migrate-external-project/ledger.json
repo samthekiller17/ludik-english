@@ -1,0 +1,83 @@
+{
+  "source": "code-archive: ludikv2-main.zip",
+  "capabilities": [
+    {
+      "capability": "code",
+      "source": "src/, public/ (10 routes, ludik components, data, store, services, 6 game modules)",
+      "outcome": "migrate",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "schema",
+      "source": "none - no server database; app state kept in browser storage via PersistenceAdapter",
+      "outcome": "not applicable",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "records",
+      "source": "none - seed data bundled in src/store/seed.ts and src/data/*",
+      "outcome": "migrate with code",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "auth identities",
+      "source": "simulated authService (guest / Moodle SSO placeholder, no real accounts or user store)",
+      "outcome": "preserve simulated behavior; no users exist to import",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "authorization",
+      "source": "client-side plan gating (rules.ts, PlanLockDialog)",
+      "outcome": "migrate with code",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "uploaded file bytes",
+      "source": "21 hosted asset pointers (characters, RPG art, Echo MP3s) owned by source project 1c156977",
+      "outcome": "re-hosted 23 assets in this project (sizes match source)",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "external providers",
+      "source": "Google Fonts only; no payments, email, AI, analytics, storage",
+      "outcome": "preserve",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "public endpoints / callbacks / webhooks / schedules",
+      "source": "none",
+      "outcome": "not applicable",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "secrets",
+      "source": "none required",
+      "outcome": "not applicable",
+      "status": "verified",
+      "next_action": "none"
+    },
+    {
+      "capability": "cutover",
+      "source": "previous live app (if any)",
+      "outcome": "user publishes this project when ready",
+      "status": "pending",
+      "next_action": "User publishes"
+    },
+    {
+      "capability": "verification",
+      "source": "build, tests, routes, guest flow",
+      "outcome": "verify",
+      "status": "verified",
+      "next_action": "none"
+    }
+  ],
+  "notes": "Source copied; 28 asset pointers re-hosted in this project (sizes match). Build OK, 34 tests pass; pages load with images, no failed asset requests."
+}

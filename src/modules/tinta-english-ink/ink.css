@@ -1,0 +1,291 @@
+/* Piel editorial aislada: no modifica el marco Ludik. */
+.english-ink {
+  --paper: oklch(0.9 0.03 85);
+  --cream: oklch(0.95 0.025 85);
+  --surface: oklch(0.97 0.018 85);
+  --ink: oklch(0.29 0.025 65);
+  --secondary: oklch(0.43 0.03 65);
+  --edge: oklch(0.76 0.04 80);
+  --success: oklch(0.43 0.09 150);
+  --error: oklch(0.45 0.12 28);
+  --warning: oklch(0.43 0.09 65);
+  --focus: oklch(0.42 0.16 260);
+  background: radial-gradient(ellipse at top left, var(--cream), var(--paper));
+  color: var(--ink);
+  padding: clamp(16px, 4vw, 36px);
+  border: 1px solid var(--edge);
+  max-width: 960px;
+  margin: auto;
+  isolation: isolate;
+}
+.english-ink h1,
+.english-ink h2,
+.english-ink .ink-quote,
+.english-ink .ink-slip p {
+  font-family: "Lora", "Libre Baskerville", Georgia, "Times New Roman", serif;
+}
+.english-ink h1 {
+  font-size: clamp(26px, 5vw, 44px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+.english-ink h2 {
+  font-size: 24px;
+}
+.english-ink p {
+  line-height: 1.5;
+}
+.english-ink .ink-eyebrow {
+  letter-spacing: 0.16em;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--secondary);
+}
+.english-ink .ink-welcome {
+  text-align: center;
+  max-width: 700px;
+  margin: auto;
+  padding: 20px 0;
+}
+.english-ink .ink-quote {
+  font-style: italic;
+  font-size: 22px;
+  margin: 20px 0;
+}
+.english-ink .ink-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+.english-ink .ink-steps li {
+  background: var(--cream);
+  border: 1px solid var(--edge);
+  border-radius: 12px;
+  padding: 14px 8px;
+}
+.english-ink .ink-steps b {
+  display: block;
+  margin-bottom: 8px;
+}
+.english-ink select,
+.english-ink input {
+  background: var(--surface);
+  border: 2px solid var(--edge);
+  border-radius: 12px;
+  padding: 12px;
+  color: var(--ink);
+  min-height: 48px;
+  max-width: 100%;
+  font-size: 16px;
+}
+.english-ink select {
+  margin-top: 8px;
+}
+.english-ink :is(button, input, select):focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+.english-ink button {
+  min-height: 44px;
+}
+.english-ink .ink-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.english-ink .ink-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--edge);
+  font-weight: 800;
+  font-size: 15px;
+}
+.english-ink .ink-arena {
+  height: 380px;
+  position: relative;
+  overflow: hidden;
+  margin: 18px 0;
+  border-bottom: 3px dashed var(--edge);
+  background: repeating-linear-gradient(transparent 0 37px, var(--edge) 38px, transparent 39px);
+  border-radius: 12px;
+}
+.english-ink .ink-slip {
+  position: absolute;
+  max-width: 92%;
+  width: max-content;
+  background: var(--surface);
+  border: 1px solid var(--edge);
+  border-radius: 4px 12px 8px 4px;
+  padding: 8px 16px;
+  box-shadow: 0 3px 8px oklch(0.3 0.02 60 / 0.09);
+  will-change: top;
+}
+.english-ink .ink-slip p {
+  font-size: clamp(18px, 2.5vw, 22px);
+  line-height: 1.25;
+}
+.english-ink .ink-number {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--secondary);
+}
+.english-ink .ink-time {
+  font-size: 12px;
+  color: var(--secondary);
+}
+.english-ink .ink-writing {
+  position: relative;
+  border: 2px solid var(--edge);
+  border-radius: 16px;
+  padding: 16px;
+  background: var(--cream);
+}
+.english-ink label {
+  font-weight: 800;
+}
+.english-ink .ink-input-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+.english-ink input {
+  flex: 1;
+  min-width: 0;
+}
+.english-ink .ink-feedback {
+  min-height: 48px;
+  margin-top: 10px;
+  font-weight: 700;
+}
+.english-ink .ink-warning {
+  color: var(--warning);
+  margin-bottom: 8px;
+}
+.english-ink .ink-power {
+  padding: 8px;
+  border: 1px dashed var(--secondary);
+  margin-bottom: 10px;
+}
+.english-ink [data-effect="success"] {
+  border-color: var(--success);
+}
+.english-ink [data-effect="error"] {
+  border-color: var(--error);
+}
+.english-ink [data-danger="near"],
+.english-ink [data-danger="high"] {
+  border-color: var(--warning);
+}
+.english-ink [data-danger="high"] {
+  border-width: 3px;
+}
+.english-ink .ink-trail {
+  position: absolute;
+  bottom: 30px;
+  right: 24px;
+  font-size: 64px;
+  color: var(--secondary);
+  pointer-events: none;
+}
+.english-ink .ink-storm {
+  position: absolute;
+  inset: 20%;
+  display: grid;
+  place-items: center;
+  border-radius: 48% 52% 63% 37%;
+  background: var(--ink);
+  color: var(--cream);
+  font-size: 28px;
+  font-weight: 900;
+  z-index: 10;
+}
+.english-ink .ink-typing:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60px;
+  height: 24px;
+  border-radius: 61% 39% 52% 48%;
+  background: oklch(0.29 0.025 65 / 0.1);
+  pointer-events: none;
+}
+.english-ink .ink-typing {
+  background-color: oklch(0.29 0.025 65 / 0.025);
+}
+.english-ink:not([data-reduced="true"]) .ink-trail {
+  animation: ink-diffuse 3s ease-out both;
+}
+.english-ink:not([data-reduced="true"]) .ink-storm {
+  animation: ink-diffuse 3s ease-out both;
+}
+.english-ink:not([data-reduced="true"]) [data-danger="high"] {
+  animation: ink-alert 2s ease-in-out infinite;
+}
+.english-ink:not([data-reduced="true"]) [data-effect="error"] {
+  animation: ink-shake 0.25s ease-in-out;
+}
+@keyframes ink-diffuse {
+  0% {
+    transform: scale(0.3);
+    opacity: 1;
+  }
+  65% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+@keyframes ink-alert {
+  50% {
+    box-shadow: 0 0 0 3px var(--edge);
+  }
+}
+@keyframes ink-shake {
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}
+@media (max-width: 600px) {
+  .english-ink .ink-steps {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .english-ink .ink-arena {
+    height: 340px;
+  }
+  .english-ink .ink-slip {
+    padding: 6px 10px;
+  }
+  .english-ink .ink-input-row {
+    flex-direction: column;
+  }
+  .english-ink .ink-header h1 {
+    font-size: 26px;
+  }
+  .english-ink .ink-writing {
+    padding: 12px;
+  }
+  .english-ink .ink-stats {
+    gap: 8px 12px;
+  }
+  .english-ink .ink-slip p {
+    font-size: 17px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .english-ink * {
+    animation: none !important;
+    transition: none !important;
+  }
+}

@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- App state (user, progress, plan, results) lives in the client store and is saved through the `PersistenceAdapter` in `src/services/persistence.ts`; swap the adapter (e.g. to a backend one) rather than calling storage directly, so the rest of the app stays unchanged.
+- Code must pass the strict typecheck (indexed access may be undefined, `override` on class members); guard array/record lookups instead of using non-null assertions.
+- Large images are hosted as Lovable asset pointers (`src/assets/*.asset.json`) and read via `.url`, keeping binaries out of the repo.
