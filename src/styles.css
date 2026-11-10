@@ -563,3 +563,11 @@ html.reduce-motion *::after {
   transition-duration: 0.001ms !important;
   scroll-behavior: auto !important;
 }
+
+/* Fondo ilustrado del mapa de aprendizaje (uno por personaje), suavizado para no competir con los nodos. */
+.path-map {
+  background:
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-card) 35%, transparent), color-mix(in oklab, var(--color-card) 55%, transparent)),
+    var(--map-bg) center top / cover no-repeat,
+    var(--color-card);
+}

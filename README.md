@@ -1,24 +1,24 @@
-# Project Launchpad
+# Ludik — Una forma divertida de aprender idiomas
 
-/skill:migrate-external-project Source: code archive. Migrate the attached project into Lovable.
+Plataforma de aprendizaje de inglés con cuatro guías (Echo · Listening, Lexi · Reading, Tinta · Writing, Fono · Speaking) y minijuegos por habilidad.
 
-This project was built with [Lovable](https://lovable.dev).
+## Estructura
+- `src/routes/` — páginas (hub, ejercicio, progreso, logros, planes, nosotros, ajustes, acceso).
+- `src/features/` — header, hub, mapa de aprendizaje, selector de personajes, `ModuleShell`.
+- `src/modules/<id>/` — cada minijuego (`index.tsx` + contenido editable).
+- `src/data/` — personajes, caminos por habilidad, insignias, planes, registro de módulos.
+- `src/services/` — reglas de desbloqueo, servicios y adaptador de persistencia.
+- `src/store/` — estado global y datos semilla.
 
-## Build with Lovable
+## Cómo agregar…
+- **Un módulo:** crea `src/modules/mi-modulo/index.tsx` que reciba `ModuleProps` y llame a `onComplete(result)`; añade una entrada en `src/data/modules.registry.ts`.
+- **Un nivel:** añade un nodo en `src/data/paths.ts` con `moduleId` y `levelId`. Los nodos sin módulo muestran "Próximamente". Al cambiar el nivel MCER se crea una nueva unidad en el mapa.
+- **Un personaje:** añade su ficha en `src/data/characters.ts`, su imagen en `src/assets/` y su camino en `paths.ts`.
+- **Un plan:** edita `src/data/plans.ts` (funciones por plan) y marca nodos con `requiresPlan`.
+- **Un idioma de estudio:** duplica los archivos de contenido de cada módulo con el nuevo idioma; el motor es el mismo.
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/9e2027bb-5b5d-43e9-a890-2b99f6efc19d).
+## Persistencia
+Todo pasa por `PersistenceAdapter` (`src/services/persistence.ts`). Para un backend, sustituye el adaptador; el resto de la app no cambia.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+## Pruebas
+`bunx vitest run` — reglas de desbloqueo, puntuación de módulos y rutas.

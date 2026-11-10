@@ -14,6 +14,7 @@ import { CefrBadge, ProgressBar } from "@/components/ludik/bits";
 import { LiveRegion, ResultsScreen, percent, starsFor, useElapsed } from "@/modules/_shared/kit";
 import { cn } from "@/lib/utils";
 import content from "./content.json";
+import htmlVersion from "@/assets/games/listening-challenge.html.asset.json";
 import a1Audio from "@/assets/audio/echo-a1.mp3.asset.json";
 import b1Audio from "@/assets/audio/echo-b1.mp3.asset.json";
 import c1Audio from "@/assets/audio/echo-c1.mp3.asset.json";
@@ -173,6 +174,17 @@ function Run(props: ModuleProps & { level: Level; retry: () => void }) {
           <Button size="lg" variant="teal" onClick={() => setScreen("play")}>
             <Play aria-hidden /> Comenzar
           </Button>
+          <p className="text-sm">
+            <a
+              href={htmlVersion.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-bold text-cobalt underline underline-offset-4"
+            >
+              Abrir la versión HTML sin JavaScript
+              <span className="sr-only"> (se abre en una pestaña nueva)</span>
+            </a>
+          </p>
         </div>
       </section>
     );

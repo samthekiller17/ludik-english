@@ -13,12 +13,25 @@ import { lockReason, nodeStatus } from "@/services/rules";
 import { useLudik } from "@/store/ludik-store";
 import { cn } from "@/lib/utils";
 import type { NodeStatus, PathNode, SkillId } from "@/types/ludik";
+import mapEcho from "@/assets/maps/map-echo.webp.asset.json";
+import mapLexi from "@/assets/maps/map-lexi.webp.asset.json";
+import mapTinta from "@/assets/maps/map-tinta.webp.asset.json";
+import mapFono from "@/assets/maps/map-fono.webp.asset.json";
 import { LevelDialog } from "./LevelDialog";
 import { PlanLockDialog } from "./PlanLockDialog";
 
 const X_PATTERN = [50, 74, 50, 26];
 const GAP = 136;
 const TOP = 64;
+/** Espacio extra reservado para el separador de unidad MCER. */
+const UNIT_GAP = 72;
+
+const MAP_BG: Record<SkillId, string> = {
+  echo: mapEcho.url,
+  lexi: mapLexi.url,
+  tinta: mapTinta.url,
+  fono: mapFono.url,
+};
 
 const STATUS_TEXT: Record<NodeStatus, string> = {
   completed: "completado",
@@ -37,8 +50,17 @@ export function LearningPath({ skillId }: { skillId: SkillId }) {
 
   const statuses = path.map((_, i) => nodeStatus(path, i, state.progress, state.plan));
   const currentIdx = statuses.findIndex((s) => s === "available");
-  const pts = path.map((_, i) => ({ x: X_PATTERN[i % X_PATTERN.length] ?? 50, y: TOP + i * GAP }));
-  const height = TOP + (path.length - 1) * GAP + 90;
+  // Separadores de unidad: cada vez que cambia el nivel MCER se abre una nueva unidad.
+  const units: { level: string; y: number; index: number }[] = [];
+  let offset = 0;
+  const pts = path.map((node, i) => {
+    if (i === 0 || path[i - 1]?.level !== node.level) {
+      offset += UNIT_GAP;
+      units.push({ level: node.level, y: TOP + i * GAP + offset - UNIT_GAP + 8, index: units.length + 1 });
+    }
+    return { x: X_PATTERN[i % X_PATTERN.length] ?? 50, y: TOP + i * GAP + offset };
+  });
+  const height = TOP + (path.length - 1) * GAP + offset + 90;
 
   const seg = (i: number) => {
     const a = pts[i];
@@ -76,8 +98,26 @@ export function LearningPath({ skillId }: { skillId: SkillId }) {
         )}
       </div>
 
+      <div
+        className="path-map relative overflow-hidden rounded-2xl"
+        style={{ ["--map-bg" as string]: `url(${MAP_BG[skillId]})` }}
+      >
+      {units.map((u) => (
+        <div
+          key={`unit-${u.level}`}
+          className="absolute inset-x-4 z-[3] flex items-center gap-3"
+          style={{ top: u.y - 22 }}
+        >
+          <span aria-hidden className="h-0.5 flex-1 rounded-full bg-strong/15" />
+          <h3 className="inline-flex items-center gap-2 rounded-full border border-border bg-card/95 px-4 py-1.5 text-sm font-extrabold text-strong shadow-soft">
+            Unidad {u.index}
+            <CefrBadge level={u.level} className="px-1.5 text-xs" />
+          </h3>
+          <span aria-hidden className="h-0.5 flex-1 rounded-full bg-strong/15" />
+        </div>
+      ))}
       <ol
-        className="relative mx-auto w-full max-w-xl list-none"
+        className="relative z-[2] mx-auto w-full max-w-xl list-none"
         style={{ height }}
         aria-label={`Camino de ${c.name}`}
       >
@@ -128,7 +168,7 @@ export function LearningPath({ skillId }: { skillId: SkillId }) {
 
         {path.map((node, i) => {
           const status = statuses[i] ?? "locked";
-          const p = pts[i] ?? { x: 50, y: TOP + i * GAP };
+          const p = pts[i] ?? { x: 50, y: TOP };
           const labelRight = p.x <= 50;
           const progress = state.progress[node.id];
           const TypeIcon =
@@ -241,6 +281,7 @@ export function LearningPath({ skillId }: { skillId: SkillId }) {
           );
         })}
       </ol>
+      </div>
 
       <LevelDialog node={openNode} onClose={() => setOpenNode(null)} />
       <PlanLockDialog node={planNode} onClose={() => setPlanNode(null)} />

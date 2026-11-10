@@ -9,6 +9,6 @@
 - [x] Fase 7 — Módulo Fono: Eco de Voz (A1–B1, micrófono + autoevaluación)
 - [x] Fase 8 — Echo: Listen Up! (3 regiones, 12 combates, 60 desafíos, gadgets, habilidades, inventario)
 - [x] Fase 8b — Evaluaciones Plus/Super (evaluación semanal, simulacro, entrenamiento avanzado)
-- [ ] Mejora gráfica general — fondos de mapa por personaje ya generados (src/assets/maps), falta usarlos en el camino + separadores por unidad MCER
-- [ ] Enlace al HTML de Listening Challenge desde la app (archivo ya subido: src/assets/games)
+- [x] Mejora gráfica general — fondos ilustrados por personaje en el camino + separadores por unidad MCER
+- [x] Enlace al HTML de Listening Challenge desde la pantalla de inicio del módulo
 - [ ] Fase 9 — Pulido: README, verificación móvil final
