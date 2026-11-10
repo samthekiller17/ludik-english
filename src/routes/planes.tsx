@@ -99,7 +99,7 @@ function PlansPage() {
         <SectionTitle>
           <span id="comparar">Compara los planes</span>
         </SectionTitle>
-        <div className="mt-6 overflow-x-auto rounded-2xl border border-border bg-card shadow-card">
+        <div tabIndex={0} role="region" aria-label="Tabla comparativa de planes" className="relative mt-6 overflow-x-auto rounded-2xl focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-cobalt border border-border bg-card shadow-card">
           <table className="w-full min-w-[560px] text-left">
             <caption className="sr-only">Funciones incluidas en cada plan</caption>
             <thead>

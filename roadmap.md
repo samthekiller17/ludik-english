@@ -11,4 +11,4 @@
 - [x] Fase 8b — Evaluaciones Plus/Super (evaluación semanal, simulacro, entrenamiento avanzado)
 - [x] Mejora gráfica general — fondos ilustrados por personaje en el camino + separadores por unidad MCER
 - [x] Enlace al HTML de Listening Challenge desde la pantalla de inicio del módulo
-- [ ] Fase 9 — Pulido: README, verificación móvil final
+- [x] Fase 9 — Pulido: README, auditoría axe (WCAG AA) en 12 pantallas, verificación 360 px y 768 px

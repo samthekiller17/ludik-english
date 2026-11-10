@@ -239,7 +239,7 @@ export function LearningPath({ skillId }: { skillId: SkillId }) {
                 {/* Etiqueta del nivel */}
                 <div
                   className={cn(
-                    "absolute top-1/2 w-[8.5rem] -translate-y-1/2 sm:w-52",
+                    "absolute top-1/2 w-[6.5rem] -translate-y-1/2 hyphens-auto break-words min-[400px]:w-[8.5rem] sm:w-52",
                     labelRight ? "left-[88px]" : "right-[88px] text-right",
                   )}
                 >
