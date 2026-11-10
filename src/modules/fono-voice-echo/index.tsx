@@ -480,6 +480,10 @@ function SpeakCard({
       mediaRef.current = mr;
       mr.start();
       setRecording(true);
+      // Evita que el micrófono quede encendido si el estudiante olvida detenerlo.
+      window.setTimeout(() => {
+        if (mr.state === "recording") mr.stop();
+      }, 20000);
     } catch {
       setLive("No pudimos usar el micrófono. Dilo en voz alta y califícate.");
       setClip("none");

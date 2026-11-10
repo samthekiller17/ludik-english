@@ -104,7 +104,7 @@ export function LearningPath({ skillId }: { skillId: SkillId }) {
       >
       {units.map((u) => (
         <div
-          key={`unit-${u.level}`}
+          key={`unit-${u.index}`}
           className="absolute inset-x-4 z-[3] flex items-center gap-3"
           style={{ top: u.y - 22 }}
         >
