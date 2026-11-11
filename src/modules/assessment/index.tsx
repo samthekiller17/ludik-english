@@ -176,7 +176,7 @@ function Run(props: ModuleProps & { exam: Exam; retry: () => void }) {
             <li>• Corrección en tiempo real con explicación de cada error</li>
             <li>• Aprobado con 70 % o más</li>
           </ul>
-          <Button size="lg" onClick={() => setScreen("play")}>
+          <Button size="lg" onClick={() => { elapsed(true); setScreen("play"); }}>
             Empezar evaluación
           </Button>
         </div>

@@ -54,6 +54,29 @@ describe("English Ink", () => {
       r = tick(r, 0.02, BANKS.A1, "untimed");
       expect(r.active.length).toBeLessThanOrEqual(4);
     }
-    expect(r.active[0]?.duration).toBe(6.5);
+    expect(r.active[0]?.duration).toBe(18);
+  });
+  it("accepts optional punctuation without relaxing grammar", () => {
+    const run = tick(createRun(10), 0, BANKS.A1, "normal");
+    expect(submit(run, " SHE is happy!!! ", BANKS.A1).correct).toHaveLength(1);
+    expect(submit(run, "She are happy", BANKS.A1).correct).toHaveLength(0);
+  });
+  it("accepts expanded negatives and smart apostrophes", () => {
+    const phrase = BANKS.A1.find((p) => p.id === "A1-8");
+    if (!phrase) throw new Error("Missing phrase");
+    const run = tick(createRun(10), 0, [phrase], "normal");
+    expect(submit(run, "He does not like coffee", [phrase]).correct).toHaveLength(1);
+    expect(submit(run, "He doesn’t like coffee", [phrase]).correct).toHaveLength(1);
+    expect(submit(run, "He do not like coffee", [phrase]).correct).toHaveLength(0);
+  });
+  it("keeps at least 125 points for a correction near the deadline", () => {
+    let run = tick(createRun(10), 0, BANKS.A1, "normal");
+    run = tick(run, 17.9, BANKS.A1, "normal");
+    expect(submit(run, "She is happy", BANKS.A1).points).toBe(125);
+  });
+  it("does not spend INK or award points without visible pages", () => {
+    const run = submit(createRun(0), "INK", BANKS.A1);
+    expect(run.stormUsed).toBe(false);
+    expect(run.points).toBe(0);
   });
 });

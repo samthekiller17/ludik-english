@@ -358,16 +358,22 @@ function SpeakCard({
   onFallback(msg: string): void;
   onDone(score: number, topic: string): void;
 }) {
+  useStopSpeechOnUnmount();
   const modelText = item.kind === "answer" ? item.sample : item.text;
   const spoken = item.kind === "answer" ? item.question : item.text;
   const [listening, setListening] = useState(false);
   const [heard, setHeard] = useState<string | null>(null);
   const [result, setResult] = useState<{ score: number; words: WordResult[] } | null>(null);
   const [recording, setRecording] = useState(false);
+  const [pendingRecording, setPendingRecording] = useState(false);
   const [clip, setClip] = useState<string | null>(null);
   const [live, setLive] = useState("");
   const recRef = useRef<Recognition | null>(null);
   const mediaRef = useRef<MediaRecorder | null>(null);
+  const streamRef = useRef<MediaStream | null>(null);
+  const mounted = useRef(true);
+  const pending = useRef(false);
+  const recordingTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const tts = speechSupported();
 
@@ -379,13 +385,22 @@ function SpeakCard({
   }, [item, spoken]);
 
   // Al salir de la tarjeta: detener micrófono y grabación.
-  useEffect(
-    () => () => {
-      recRef.current?.stop();
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+      const rec = recRef.current;
+      if (rec) {
+        rec.onresult = null;
+        rec.onerror = null;
+        rec.onend = null;
+        rec.stop();
+      }
+      if (recordingTimer.current !== null) clearTimeout(recordingTimer.current);
+      streamRef.current?.getTracks().forEach((track) => track.stop());
       if (mediaRef.current?.state === "recording") mediaRef.current.stop();
-    },
-    [],
-  );
+    };
+  }, []);
 
   // Liberar la grabación anterior cuando se reemplaza.
   useEffect(
@@ -454,6 +469,7 @@ function SpeakCard({
   }
 
   async function toggleRecording() {
+    if (pending.current) return;
     if (recording) {
       mediaRef.current?.stop();
       return;
@@ -467,13 +483,22 @@ function SpeakCard({
       setClip("none");
       return;
     }
+    pending.current = true;
+    setPendingRecording(true);
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      if (!mounted.current) {
+        stream.getTracks().forEach((track) => track.stop());
+        return;
+      }
+      streamRef.current = stream;
       const chunks: Blob[] = [];
       const mr = new MediaRecorder(stream);
       mr.ondataavailable = (e) => chunks.push(e.data);
       mr.onstop = () => {
+        if (recordingTimer.current !== null) clearTimeout(recordingTimer.current);
         stream.getTracks().forEach((t) => t.stop());
+        if (!mounted.current) return;
         setRecording(false);
         setClip(URL.createObjectURL(new Blob(chunks, { type: mr.mimeType })));
       };
@@ -481,12 +506,17 @@ function SpeakCard({
       mr.start();
       setRecording(true);
       // Evita que el micrófono quede encendido si el estudiante olvida detenerlo.
-      window.setTimeout(() => {
+      recordingTimer.current = setTimeout(() => {
         if (mr.state === "recording") mr.stop();
       }, 20000);
     } catch {
+      streamRef.current?.getTracks().forEach((track) => track.stop());
+      if (!mounted.current) return;
       setLive("No pudimos usar el micrófono. Dilo en voz alta y califícate.");
       setClip("none");
+    } finally {
+      pending.current = false;
+      if (mounted.current) setPendingRecording(false);
     }
   }
 
@@ -642,9 +672,9 @@ function SpeakCard({
         {mode === "self" && (
           <div className="space-y-3">
             {clip !== "none" && (
-              <Button size="lg" variant="blue" onClick={toggleRecording}>
+              <Button size="lg" variant="blue" onClick={toggleRecording} disabled={pendingRecording}>
                 {recording ? <Square aria-hidden /> : <Mic aria-hidden />}{" "}
-                {recording ? "Terminar grabación" : clip ? "Grabar otra vez" : "Grabar mi voz"}
+                {pendingRecording ? "Esperando micrófono…" : recording ? "Terminar grabación" : clip ? "Grabar otra vez" : "Grabar mi voz"}
               </Button>
             )}
             {clip && clip !== "none" && (
@@ -655,7 +685,7 @@ function SpeakCard({
                 </audio>
               </div>
             )}
-            {(clip || !recording) && (
+            {!recording && !pendingRecording && (
               <div className="rounded-2xl border border-border p-3">
                 <p className="font-extrabold text-strong">¿Cómo te salió?</p>
                 <div className="mt-2 flex flex-wrap gap-2">

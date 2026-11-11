@@ -214,19 +214,19 @@ export default function EnglishInk(props: ModuleProps) {
             </li>
           </ol>
           <p>
-            20 frases · 3 vidas · +100 por corrección · Escribe INK cuando aparezca para activar un
+            20 frases · 3 vidas · +125 por corrección y hasta 25 extra · Escribe INK cuando aparezca para activar un
             poder de un solo uso.
           </p>
           <label className="mt-5 block font-bold" htmlFor="ink-pace">
             Tu ritmo de escritura
           </label>
           <select id="ink-pace" value={pace} onChange={(e) => setPace(e.target.value as Pace)}>
-            <option value="normal">Clásico · 6,5 s / 4,5 s</option>
+            <option value="normal">Clásico · al menos 18 s / 14 s</option>
             <option value="slow">Tranquilo · triple de tiempo</option>
             <option value="untimed">Sin presión de tiempo</option>
           </select>
           <p className="mt-2">
-            Se ignoran mayúsculas y espacios extra. Conserva la puntuación de la frase.
+            Se aceptan mayúsculas, espacios extra, puntuación opcional y contracciones equivalentes.
           </p>
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <Button onClick={start}>COMENZAR A JUGAR</Button>
@@ -281,18 +281,19 @@ export default function EnglishInk(props: ModuleProps) {
                 className="ink-slip"
                 style={{
                   top: `${props.reducedMotion ? a.lane * 24 : Math.min(82, (a.age / a.duration) * 82)}%`,
-                  left: `${props.reducedMotion ? 0 : a.lane * 2}%`,
-                  zIndex: a.lane + 1,
+                  gridRow: a.lane + 1,
+                  transform: `translateY(${props.reducedMotion || pace === "untimed" ? 0 : (a.age / a.duration) * 12}px)`,
                 }}
               >
                 <span className="ink-number">{a.phrase.id}</span>
                 <p lang="en">{a.phrase.wrong}</p>
-                {props.reducedMotion && (
-                  <span className="ink-time">
+                <span className="ink-time">
                     {pace === "untimed"
                       ? "Sin límite"
                       : `${Math.ceil(a.duration - a.age)} s restantes`}
-                  </span>
+                </span>
+                {pace !== "untimed" && (
+                  <progress className="ink-page-progress" value={Math.max(0, a.duration - a.age)} max={a.duration} aria-label={`Tiempo restante para ${a.phrase.id}`} />
                 )}
               </article>
             ))}

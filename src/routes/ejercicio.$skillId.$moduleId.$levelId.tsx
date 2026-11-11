@@ -19,6 +19,8 @@ export const Route = createFileRoute("/ejercicio/$skillId/$moduleId/$levelId")({
       { property: "og:title", content: "Ejercicio · Ludik" },
       { property: "og:description", content: "Practica tu idioma con los minijuegos de Ludik." },
       { name: "robots", content: "noindex" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: ExercisePage,

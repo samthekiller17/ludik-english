@@ -19,10 +19,13 @@ export { starsFor };
 export const percent = (correct: number, total: number) =>
   total > 0 ? Math.round((correct / total) * 100) : 0;
 
-/** Segundos transcurridos desde que se montó el módulo. */
+/** Reloj reiniciable: el juego decide cuándo empieza la actividad. */
 export function useElapsed() {
   const start = useRef(Date.now());
-  return useCallback(() => Math.round((Date.now() - start.current) / 1000), []);
+  return useCallback((reset = false) => {
+    if (reset) start.current = Date.now();
+    return Math.round((Date.now() - start.current) / 1000);
+  }, []);
 }
 
 /** Baraja una copia del arreglo (Fisher–Yates). */

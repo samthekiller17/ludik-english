@@ -90,7 +90,13 @@ export function tick(run: Run, dt: number, bank: Phrase[], pace: Pace): Run {
         spawn: 1.8,
         active: [
           ...r.active,
-          { phrase, age: 0, duration: (r.next < 5 ? 6.5 : 4.5) * (pace === "slow" ? 3 : 1), lane },
+          {
+            phrase,
+            age: 0,
+            duration: Math.max(r.next < 5 ? 18 : 14, phrase.right.length / 3 + 4) *
+              (pace === "slow" ? 3 : 1),
+            lane,
+          },
         ],
       };
     }
@@ -100,7 +106,7 @@ export function tick(run: Run, dt: number, bank: Phrase[], pace: Pace): Run {
 export function submit(run: Run, text: string, bank: Phrase[]): Run {
   if (run.done || !text.trim()) return run;
   const value = normalize(text);
-  if (value === "ink" && !run.stormUsed && run.elapsed >= run.stormAt)
+  if (value === "ink" && run.active.length > 0 && !run.stormUsed && run.elapsed >= run.stormAt)
     return finish(
       {
         ...run,
@@ -131,7 +137,7 @@ export function submit(run: Run, text: string, bank: Phrase[]): Run {
       correct: [...run.correct, match.phrase.id],
       streak,
       best: Math.max(streak, run.best),
-      points: run.points + 100 + Math.round(50 * (1 - match.age / match.duration)),
+      points: run.points + 125 + Math.round(25 * (1 - match.age / match.duration)),
       message: "✓ ¡Correcto! " + match.phrase.right,
       effect: "success",
       effectUntil: run.elapsed + 3,

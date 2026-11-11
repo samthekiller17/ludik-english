@@ -410,5 +410,18 @@ function make(level: InkLevel) {
   });
 }
 export function normalize(value: string): string {
-  return value.trim().replace(/\s+/g, " ").toLowerCase();
+  return value
+    .toLowerCase()
+    .replace(/[’‘]/g, "'")
+    .replace(/\bwon't\b/g, "will not")
+    .replace(/\bcan't\b/g, "cannot")
+    .replace(/\bcan not\b/g, "cannot")
+    .replace(/n't\b/g, " not")
+    .replace(/\bi'm\b/g, "i am")
+    .replace(/'re\b/g, " are")
+    .replace(/'ve\b/g, " have")
+    .replace(/'ll\b/g, " will")
+    .replace(/[.,!?;:"…]/g, " ")
+    .trim()
+    .replace(/\s+/g, " ");
 }

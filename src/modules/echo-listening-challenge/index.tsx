@@ -171,7 +171,7 @@ function Run(props: ModuleProps & { level: Level; retry: () => void }) {
             Hasta {level.xp} XP + bonus de racha · 70 % para 2 estrellas · 90 % para 3. Sin límite
             de tiempo.
           </p>
-          <Button size="lg" variant="teal" onClick={() => setScreen("play")}>
+          <Button size="lg" variant="teal" onClick={() => { elapsed(true); setScreen("play"); }}>
             <Play aria-hidden /> Comenzar
           </Button>
           <p className="text-sm">

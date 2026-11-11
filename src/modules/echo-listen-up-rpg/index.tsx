@@ -221,7 +221,7 @@ function Campaign(props: ModuleProps & { region: Region; retry: () => void }) {
     0,
   );
   const score = percent(totals.correct, totals.answered);
-  const stars = won === region.encounters.length ? starsFor(score) : Math.min(2, starsFor(score));
+  const stars = won === region.encounters.length ? starsFor(score) : 1;
   const failedTopics = [...new Set(totals.failed)];
 
   useEffect(() => {
@@ -239,7 +239,7 @@ function Campaign(props: ModuleProps & { region: Region; retry: () => void }) {
       total: totals.answered,
       timeSeconds: seconds,
       failedTopics,
-      completed: true,
+      completed: won === region.encounters.length,
     });
   }, [screen, props, won, score, xpEarned, coinsEarned, stars, totals, seconds, failedTopics]);
 
@@ -615,6 +615,7 @@ function Combat({
     bestCombo: number;
   }): void;
 }) {
+  useStopSpeechOnUnmount();
   const [cs, setCs] = useState<CombatState>(() => createCombat(encounter, loadout));
   const [q, setQ] = useState(0);
   const [ability, setAbility] = useState<AbilityId>("fire");

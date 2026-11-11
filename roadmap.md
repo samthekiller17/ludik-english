@@ -12,3 +12,5 @@
 - [x] Mejora gráfica general — fondos ilustrados por personaje en el camino + separadores por unidad MCER
 - [x] Enlace al HTML de Listening Challenge desde la pantalla de inicio del módulo
 - [x] Fase 9 — Pulido: README, auditoría axe (WCAG AA) en 12 pantallas, verificación 360 px y 768 px
+- [ ] Corregir superposición de frases y flexibilizar respuestas/puntos en Tinta.
+- [ ] Rejugar los módulos y evaluaciones, corregir fallos reproducibles y comprobar regresiones.

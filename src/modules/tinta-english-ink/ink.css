@@ -25,9 +25,9 @@
   font-family: "Lora", "Libre Baskerville", Georgia, "Times New Roman", serif;
 }
 .english-ink h1 {
-  font-size: clamp(26px, 5vw, 44px);
+  font-size: 36px;
   font-weight: 800;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   line-height: 1.2;
 }
 .english-ink h2 {
@@ -106,27 +106,31 @@
   font-size: 15px;
 }
 .english-ink .ink-arena {
-  height: 380px;
+  display: grid;
+  grid-template-rows: repeat(4, minmax(112px, auto));
+  gap: 16px;
   position: relative;
-  overflow: hidden;
+  padding-bottom: 16px;
   margin: 18px 0;
   border-bottom: 3px dashed var(--edge);
   background: repeating-linear-gradient(transparent 0 37px, var(--edge) 38px, transparent 39px);
   border-radius: 12px;
 }
 .english-ink .ink-slip {
-  position: absolute;
-  max-width: 92%;
-  width: max-content;
+  position: relative;
+  top: auto !important;
+  align-self: start;
+  min-width: 0;
+  width: 100%;
   background: var(--surface);
   border: 1px solid var(--edge);
   border-radius: 4px 12px 8px 4px;
   padding: 8px 16px;
   box-shadow: 0 3px 8px oklch(0.3 0.02 60 / 0.09);
-  will-change: top;
+  overflow-wrap: anywhere;
 }
 .english-ink .ink-slip p {
-  font-size: clamp(18px, 2.5vw, 22px);
+  font-size: 20px;
   line-height: 1.25;
 }
 .english-ink .ink-number {
@@ -135,8 +139,16 @@
   color: var(--secondary);
 }
 .english-ink .ink-time {
+  display: block;
   font-size: 12px;
   color: var(--secondary);
+}
+.english-ink .ink-page-progress {
+  display: block;
+  width: 100%;
+  height: 6px;
+  margin-top: 8px;
+  accent-color: var(--focus);
 }
 .english-ink .ink-writing {
   position: relative;
@@ -262,7 +274,7 @@
     grid-template-columns: repeat(2, 1fr);
   }
   .english-ink .ink-arena {
-    height: 340px;
+    grid-template-rows: repeat(4, minmax(112px, auto));
   }
   .english-ink .ink-slip {
     padding: 6px 10px;

@@ -34,3 +34,5 @@ use the editor.
 - App state (user, progress, plan, results) lives in the client store and is saved through the `PersistenceAdapter` in `src/services/persistence.ts`; swap the adapter (e.g. to a backend one) rather than calling storage directly, so the rest of the app stays unchanged.
 - Code must pass the strict typecheck (indexed access may be undefined, `override` on class members); guard array/record lookups instead of using non-null assertions.
 - Large images are hosted as Lovable asset pointers (`src/assets/*.asset.json`) and read via `.url`, keeping binaries out of the repo.
+- Game activity clocks reset on explicit start; microphone requests and speech are disposed at practice-card boundaries to prevent idle-time inflation and orphan media.
+- English Ink phrases occupy independent adaptive grid rows; position animations must never share the same text area.
