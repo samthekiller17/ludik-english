@@ -36,3 +36,4 @@ use the editor.
 - Large images are hosted as Lovable asset pointers (`src/assets/*.asset.json`) and read via `.url`, keeping binaries out of the repo.
 - Game activity clocks reset on explicit start; microphone requests and speech are disposed at practice-card boundaries to prevent idle-time inflation and orphan media.
 - English Ink phrases occupy independent adaptive grid rows; position animations must never share the same text area.
+- Module boundaries are keyed by module, node and level so next-level navigation cannot reuse completed game state.

@@ -118,7 +118,6 @@
 }
 .english-ink .ink-slip {
   position: relative;
-  top: auto !important;
   align-self: start;
   min-width: 0;
   width: 100%;

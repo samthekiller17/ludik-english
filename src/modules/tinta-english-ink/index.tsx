@@ -214,8 +214,8 @@ export default function EnglishInk(props: ModuleProps) {
             </li>
           </ol>
           <p>
-            20 frases · 3 vidas · +125 por corrección y hasta 25 extra · Escribe INK cuando aparezca para activar un
-            poder de un solo uso.
+            20 frases · 3 vidas · +125 por corrección y hasta 25 extra · Escribe INK cuando aparezca
+            para activar un poder de un solo uso.
           </p>
           <label className="mt-5 block font-bold" htmlFor="ink-pace">
             Tu ritmo de escritura
@@ -280,7 +280,6 @@ export default function EnglishInk(props: ModuleProps) {
                 key={a.phrase.id}
                 className="ink-slip"
                 style={{
-                  top: `${props.reducedMotion ? a.lane * 24 : Math.min(82, (a.age / a.duration) * 82)}%`,
                   gridRow: a.lane + 1,
                   transform: `translateY(${props.reducedMotion || pace === "untimed" ? 0 : (a.age / a.duration) * 12}px)`,
                 }}
@@ -288,12 +287,17 @@ export default function EnglishInk(props: ModuleProps) {
                 <span className="ink-number">{a.phrase.id}</span>
                 <p lang="en">{a.phrase.wrong}</p>
                 <span className="ink-time">
-                    {pace === "untimed"
-                      ? "Sin límite"
-                      : `${Math.ceil(a.duration - a.age)} s restantes`}
+                  {pace === "untimed"
+                    ? "Sin límite"
+                    : `${Math.ceil(a.duration - a.age)} s restantes`}
                 </span>
                 {pace !== "untimed" && (
-                  <progress className="ink-page-progress" value={Math.max(0, a.duration - a.age)} max={a.duration} aria-label={`Tiempo restante para ${a.phrase.id}`} />
+                  <progress
+                    className="ink-page-progress"
+                    value={Math.max(0, a.duration - a.age)}
+                    max={a.duration}
+                    aria-label={`Tiempo restante para ${a.phrase.id}`}
+                  />
                 )}
               </article>
             ))}

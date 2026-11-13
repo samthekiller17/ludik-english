@@ -132,7 +132,10 @@ export function LazyModule({ entry, props }: { entry: ModuleEntry; props: Module
   const C = getLazyModule(entry);
   if (!C) return null;
   return (
-    <ModuleErrorBoundary skillId={props.skillId}>
+    <ModuleErrorBoundary
+      key={`${entry.id}:${props.nodeId}:${props.levelId}`}
+      skillId={props.skillId}
+    >
       <Suspense fallback={<ModuleLoading />}>
         <C {...props} />
       </Suspense>
